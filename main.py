@@ -1,5 +1,15 @@
 import data
+import helpers
+
+
 class TestUrbanRoutes:
+    @classmethod
+    def setup_class(cls):
+        if helpers.is_url_reachable(data.URBAN_ROUTES_URL):
+            print("Conectado ao servidor Urban Routes")
+        else:
+            print("Não foi possível conectar ao Urban Routes. Verifique se o servidor está ligado e ainda em execução.")
+
     def test_set_route(self):
         # Adicionar em S8
         pass
@@ -25,6 +35,7 @@ class TestUrbanRoutes:
         pass
 
     def test_order_2_ice_creams(self):
+        for i in range(2):
         # Adicionar em S8
         pass
 

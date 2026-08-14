@@ -27,11 +27,39 @@ class TestUrbanRoutes:
         }
 
         cls.driver = webdriver.Chrome()
-        cls.driver.get(data.URBAN_ROUTES_URL)
 
     @classmethod
     def teardown_class(cls):
         cls.driver.quit()
+
+    # =========================
+    # SETUP DE CADA TESTE
+    # =========================
+
+    def setup_method(self):
+
+        self.driver.get(data.URBAN_ROUTES_URL)
+
+        self.page = UrbanRoutesPage(self.driver)
+
+        self.page.set_route(
+            data.ADDRESS_FROM,
+            data.ADDRESS_TO
+        )
+
+    # =========================
+    # PREPARAR PEDIDO
+    # =========================
+
+    def prepare_order(self):
+
+        self.page.call_initial_taxi()
+
+        assert self.page.is_order_form_visible()
+
+        self.page.select_comfort()
+
+        assert self.page.is_comfort_active()
 
     # =========================
     # 1 - DEFINIR ROTA
@@ -39,12 +67,8 @@ class TestUrbanRoutes:
 
     def test_set_route(self):
 
-        page = UrbanRoutesPage(self.driver)
-
-        page.set_route(
-            data.ADDRESS_FROM,
-            data.ADDRESS_TO
-        )
+        assert self.page.get_from_value() == data.ADDRESS_FROM
+        assert self.page.get_to_value() == data.ADDRESS_TO
 
     # =========================
     # 2 - CHAMAR TÁXI INICIAL
@@ -52,9 +76,9 @@ class TestUrbanRoutes:
 
     def test_call_initial_taxi(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.page.call_initial_taxi()
 
-        page.call_initial_taxi()
+        assert self.page.is_order_form_visible()
 
     # =========================
     # 3 - SELECIONAR COMFORT
@@ -62,9 +86,13 @@ class TestUrbanRoutes:
 
     def test_select_plan(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.page.call_initial_taxi()
 
-        page.select_comfort()
+        assert self.page.is_order_form_visible()
+
+        self.page.select_comfort()
+
+        assert self.page.is_comfort_active()
 
     # =========================
     # 4 - TELEFONE
@@ -72,13 +100,15 @@ class TestUrbanRoutes:
 
     def test_fill_phone_number(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.prepare_order()
 
-        page.open_phone_form()
+        self.page.open_phone_form()
 
-        page.fill_phone_number(
+        entered_phone = self.page.fill_phone_number(
             data.PHONE_NUMBER
         )
+
+        assert entered_phone == data.PHONE_NUMBER
 
     # =========================
     # 5 - CARTÃO
@@ -86,12 +116,14 @@ class TestUrbanRoutes:
 
     def test_fill_card(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.prepare_order()
 
-        page.add_card(
+        entered_card = self.page.add_card(
             data.CARD_NUMBER,
             data.CARD_CODE
         )
+
+        assert entered_card == data.CARD_NUMBER
 
     # =========================
     # 6 - COMENTÁRIO
@@ -99,11 +131,13 @@ class TestUrbanRoutes:
 
     def test_comment_for_driver(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.prepare_order()
 
-        page.fill_comment(
+        entered_comment = self.page.fill_comment(
             data.MESSAGE_FOR_DRIVER
         )
+
+        assert entered_comment == data.MESSAGE_FOR_DRIVER
 
     # =========================
     # 7 - COBERTOR E LENÇÓIS
@@ -111,9 +145,11 @@ class TestUrbanRoutes:
 
     def test_order_blanket_and_handkerchiefs(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.prepare_order()
 
-        page.order_blanket_and_sheets()
+        blanket_selected = self.page.order_blanket_and_sheets()
+
+        assert blanket_selected is True
 
     # =========================
     # 8 - 2 SORVETES
@@ -121,16 +157,20 @@ class TestUrbanRoutes:
 
     def test_order_2_ice_creams(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.prepare_order()
 
-        page.add_ice_creams(2)
+        ice_cream_count = self.page.add_ice_creams(2)
+
+        assert ice_cream_count == 2
 
     # =========================
-    # 9 - CHAMAR TÁXI E VERIFICAR
+    # 9 - BUSCAR CARRO
     # =========================
 
     def test_car_search_model_appears(self):
 
-        page = UrbanRoutesPage(self.driver)
+        self.prepare_order()
 
-        page.call_taxi_and_check_modal()
+        self.page.call_taxi()
+
+        assert self.page.get_car_search_title() == "Buscar carro"

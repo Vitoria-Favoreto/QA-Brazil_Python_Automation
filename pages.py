@@ -12,14 +12,14 @@ class UrbanRoutesPage:
     # ENDEREÇOS
     # =========================
 
-    from_field = (By.ID, "from")
-    to_field = (By.ID, "to")
+    FROM_FIELD = (By.ID, "from")
+    TO_FIELD = (By.ID, "to")
 
     # =========================
     # BOTÃO INICIAL
     # =========================
 
-    initial_taxi_button = (
+    INITIAL_TAXI_BUTTON = (
         By.XPATH,
         "//button[@type='button' and contains(text(), 'Chamar um táxi')]"
     )
@@ -28,37 +28,40 @@ class UrbanRoutesPage:
     # TARIFA COMFORT
     # =========================
 
-    comfort_tariff = (
+    COMFORT_TARIFF = (
         By.XPATH,
         "//div[contains(@class, 'tcard')]"
-        "[.//div[contains(@class, 'tcard-title') and normalize-space()='Comfort']]"
+        "[.//div[contains(@class, 'tcard-title') "
+        "and normalize-space()='Comfort']]"
     )
 
-    comfort_active = (
+    COMFORT_ACTIVE = (
         By.XPATH,
         "//div[contains(@class, 'tcard') and contains(@class, 'active')]"
-        "[.//div[contains(@class, 'tcard-title') and normalize-space()='Comfort']]"
+        "[.//div[contains(@class, 'tcard-title') "
+        "and normalize-space()='Comfort']]"
     )
 
     # =========================
     # TELEFONE
     # =========================
 
-    phone_section = (
+    PHONE_SECTION = (
         By.XPATH,
-        "//div[contains(@class, 'np-text') and normalize-space()='Número de telefone']"
+        "//div[contains(@class, 'np-text') "
+        "and normalize-space()='Número de telefone']"
     )
 
-    phone_field = (By.ID, "phone")
+    PHONE_FIELD = (By.ID, "phone")
 
-    phone_next_button = (
+    PHONE_NEXT_BUTTON = (
         By.XPATH,
         "//button[contains(text(), 'Próximo')]"
     )
 
-    phone_code_field = (By.ID, "code")
+    PHONE_CODE_FIELD = (By.ID, "code")
 
-    confirm_phone_button = (
+    CONFIRM_PHONE_BUTTON = (
         By.XPATH,
         "//button[contains(text(), 'Confirmar')]"
     )
@@ -67,34 +70,36 @@ class UrbanRoutesPage:
     # CARTÃO
     # =========================
 
-    payment_method = (
+    PAYMENT_METHOD = (
         By.XPATH,
-        "//div[contains(@class, 'pp-text') and normalize-space()='Método de pagamento']"
+        "//div[contains(@class, 'pp-text') "
+        "and normalize-space()='Método de pagamento']"
     )
 
-    add_card_option = (
+    ADD_CARD_OPTION = (
         By.XPATH,
-        "//div[contains(@class, 'pp-title') and normalize-space()='Adicionar cartão']"
+        "//div[contains(@class, 'pp-title') "
+        "and normalize-space()='Adicionar cartão']"
     )
 
-    # Campos do cartão
-    card_number_field = (
+    CARD_NUMBER_FIELD = (
         By.XPATH,
-        "//input[@id='number' and @name='number' and @placeholder='1234 0000 4321']"
+        "//input[@id='number' and @name='number' "
+        "and @placeholder='1234 0000 4321']"
     )
 
-    card_code_field = (
+    CARD_CODE_FIELD = (
         By.XPATH,
-        "//input[@id='code' and @name='code' and @placeholder='12']"
+        "//input[@id='code' and @name='code' "
+        "and @placeholder='12']"
     )
 
-    add_card_button = (
+    ADD_CARD_BUTTON = (
         By.XPATH,
         "//button[contains(text(), 'Adicionar')]"
     )
 
-    # X para fechar janela do cartão
-    close_card_button = (
+    CLOSE_CARD_BUTTON = (
         By.CSS_SELECTOR,
         "button.close-button.section-close"
     )
@@ -103,13 +108,13 @@ class UrbanRoutesPage:
     # COMENTÁRIO
     # =========================
 
-    comment_field = (By.ID, "comment")
+    COMMENT_FIELD = (By.ID, "comment")
 
     # =========================
     # COBERTOR E LENÇÓIS
     # =========================
 
-    blanket_switch_checkbox = (
+    BLANKET_SWITCH_CHECKBOX = (
         By.XPATH,
         "//div[contains(@class, 'r-sw-container')]"
         "[.//div[contains(@class, 'r-sw-label') "
@@ -117,7 +122,7 @@ class UrbanRoutesPage:
         "//input[@type='checkbox']"
     )
 
-    blanket_switch = (
+    BLANKET_SWITCH = (
         By.XPATH,
         "//div[contains(@class, 'r-sw-container')]"
         "[.//div[contains(@class, 'r-sw-label') "
@@ -129,7 +134,7 @@ class UrbanRoutesPage:
     # SORVETE
     # =========================
 
-    ice_cream_plus = (
+    ICE_CREAM_PLUS = (
         By.XPATH,
         "//div[contains(@class, 'r-counter')]"
         "[.//div[contains(@class, 'r-counter-label') "
@@ -137,11 +142,19 @@ class UrbanRoutesPage:
         "//div[contains(@class, 'counter-plus')]"
     )
 
+    ICE_CREAM_COUNT = (
+        By.XPATH,
+        "//div[contains(@class, 'r-counter')]"
+        "[.//div[contains(@class, 'r-counter-label') "
+        "and normalize-space()='Sorvete']]"
+        "//*[contains(@class, 'counter-value')]"
+    )
+
     # =========================
     # BOTÃO FINAL
     # =========================
 
-    call_taxi_button = (
+    CALL_TAXI_BUTTON = (
         By.XPATH,
         "//button[contains(@class, 'smart-button')]"
     )
@@ -150,7 +163,7 @@ class UrbanRoutesPage:
     # BUSCAR CARRO
     # =========================
 
-    car_search_modal = (
+    CAR_SEARCH_MODAL = (
         By.CLASS_NAME,
         "order-header-title"
     )
@@ -159,7 +172,7 @@ class UrbanRoutesPage:
     # OVERLAY
     # =========================
 
-    overlay = (
+    OVERLAY = (
         By.CSS_SELECTOR,
         ".overlay"
     )
@@ -179,30 +192,52 @@ class UrbanRoutesPage:
     def set_route(self, address_from, address_to):
 
         from_input = self.wait.until(
-            EC.visibility_of_element_located(self.from_field)
+            EC.visibility_of_element_located(self.FROM_FIELD)
         )
 
         from_input.clear()
         from_input.send_keys(address_from)
 
         to_input = self.wait.until(
-            EC.visibility_of_element_located(self.to_field)
+            EC.visibility_of_element_located(self.TO_FIELD)
         )
 
         to_input.clear()
         to_input.send_keys(address_to)
 
+    def get_from_value(self):
+
+        from_input = self.wait.until(
+            EC.visibility_of_element_located(self.FROM_FIELD)
+        )
+
+        return from_input.get_attribute("value")
+
+    def get_to_value(self):
+
+        to_input = self.wait.until(
+            EC.visibility_of_element_located(self.TO_FIELD)
+        )
+
+        return to_input.get_attribute("value")
+
     # =========================
-    # CHAMAR TÁXI
+    # CHAMAR TÁXI INICIAL
     # =========================
 
     def call_initial_taxi(self):
 
         button = self.wait.until(
-            EC.element_to_be_clickable(self.initial_taxi_button)
+            EC.element_to_be_clickable(self.INITIAL_TAXI_BUTTON)
         )
 
         button.click()
+
+    def is_order_form_visible(self):
+
+        return self.wait.until(
+            EC.visibility_of_element_located(self.COMFORT_TARIFF)
+        ).is_displayed()
 
     # =========================
     # SELECIONAR COMFORT
@@ -211,15 +246,21 @@ class UrbanRoutesPage:
     def select_comfort(self):
 
         comfort = self.wait.until(
-            EC.visibility_of_element_located(self.comfort_tariff)
+            EC.visibility_of_element_located(self.COMFORT_TARIFF)
         )
 
         if "active" not in comfort.get_attribute("class"):
             comfort.click()
 
         self.wait.until(
-            EC.visibility_of_element_located(self.comfort_active)
+            EC.visibility_of_element_located(self.COMFORT_ACTIVE)
         )
+
+    def is_comfort_active(self):
+
+        return self.wait.until(
+            EC.visibility_of_element_located(self.COMFORT_ACTIVE)
+        ).is_displayed()
 
     # =========================
     # TELEFONE
@@ -228,7 +269,7 @@ class UrbanRoutesPage:
     def open_phone_form(self):
 
         phone_section = self.wait.until(
-            EC.element_to_be_clickable(self.phone_section)
+            EC.element_to_be_clickable(self.PHONE_SECTION)
         )
 
         phone_section.click()
@@ -236,14 +277,17 @@ class UrbanRoutesPage:
     def fill_phone_number(self, phone):
 
         phone_input = self.wait.until(
-            EC.visibility_of_element_located(self.phone_field)
+            EC.visibility_of_element_located(self.PHONE_FIELD)
         )
 
         phone_input.clear()
         phone_input.send_keys(phone)
 
+        # Guarda o valor digitado antes de fechar o formulário.
+        entered_phone = phone_input.get_attribute("value")
+
         next_button = self.wait.until(
-            EC.element_to_be_clickable(self.phone_next_button)
+            EC.element_to_be_clickable(self.PHONE_NEXT_BUTTON)
         )
 
         next_button.click()
@@ -251,70 +295,77 @@ class UrbanRoutesPage:
         code = helpers.retrieve_phone_code(self.driver)
 
         code_input = self.wait.until(
-            EC.visibility_of_element_located(self.phone_code_field)
+            EC.visibility_of_element_located(self.PHONE_CODE_FIELD)
         )
 
         code_input.clear()
         code_input.send_keys(code)
 
         confirm_button = self.wait.until(
-            EC.element_to_be_clickable(self.confirm_phone_button)
+            EC.element_to_be_clickable(self.CONFIRM_PHONE_BUTTON)
         )
 
         confirm_button.click()
 
+        return entered_phone
+
     # =========================
-    # ADICIONAR CARTÃO
+    # CARTÃO
     # =========================
 
     def add_card(self, card_number, card_code):
 
-        # Abre o método de pagamento
+        # Abre o método de pagamento.
         payment = self.wait.until(
-            EC.element_to_be_clickable(self.payment_method)
+            EC.element_to_be_clickable(self.PAYMENT_METHOD)
         )
 
         payment.click()
 
-        # Clica em Adicionar cartão
+        # Clica em Adicionar cartão.
         add_card = self.wait.until(
-            EC.element_to_be_clickable(self.add_card_option)
+            EC.element_to_be_clickable(self.ADD_CARD_OPTION)
         )
 
         add_card.click()
 
-        # Espera o campo NUMBER aparecer
+        # Campo do número do cartão.
         number_input = self.wait.until(
-            EC.visibility_of_element_located(self.card_number_field)
+            EC.visibility_of_element_located(self.CARD_NUMBER_FIELD)
         )
 
         number_input.click()
         number_input.clear()
         number_input.send_keys(card_number)
 
-        # Espera o campo CODE aparecer
+        # Guarda o valor para o teste verificar.
+        entered_card = number_input.get_attribute("value")
+
+        # Campo do código.
         code_input = self.wait.until(
-            EC.visibility_of_element_located(self.card_code_field)
+            EC.visibility_of_element_located(self.CARD_CODE_FIELD)
         )
 
         code_input.click()
         code_input.clear()
         code_input.send_keys(card_code)
 
-        # Sai do campo para ativar o botão
+        # Sai do campo para ativar o botão.
         code_input.send_keys(Keys.TAB)
 
-        # Clica em Adicionar
+        # Clica em Adicionar.
         add_button = self.wait.until(
-            EC.element_to_be_clickable(self.add_card_button)
+            EC.element_to_be_clickable(self.ADD_CARD_BUTTON)
         )
 
         add_button.click()
 
-        # Aguarda a janela do cartão desaparecer
+        # Aguarda a janela do cartão desaparecer.
         self.wait.until(
-            EC.invisibility_of_element_located(self.card_number_field)
+            EC.invisibility_of_element_located(self.CARD_NUMBER_FIELD)
         )
+
+        return entered_card
 
     # =========================
     # COMENTÁRIO
@@ -323,11 +374,13 @@ class UrbanRoutesPage:
     def fill_comment(self, comment):
 
         comment_input = self.wait.until(
-            EC.visibility_of_element_located(self.comment_field)
+            EC.visibility_of_element_located(self.COMMENT_FIELD)
         )
 
         comment_input.clear()
         comment_input.send_keys(comment)
+
+        return comment_input.get_attribute("value")
 
     # =========================
     # COBERTOR E LENÇÓIS
@@ -335,27 +388,27 @@ class UrbanRoutesPage:
 
     def order_blanket_and_sheets(self):
 
-        # Se já estiver selecionado, não clica novamente
         checkbox = self.wait.until(
             EC.presence_of_element_located(
-                self.blanket_switch_checkbox
+                self.BLANKET_SWITCH_CHECKBOX
             )
         )
 
+        # Se já estiver selecionado, não clica novamente.
         if checkbox.is_selected():
-            return
+            return True
 
-        # Espera o overlay desaparecer
+        # Espera o overlay desaparecer.
         try:
             self.wait.until(
-                EC.invisibility_of_element_located(self.overlay)
+                EC.invisibility_of_element_located(self.OVERLAY)
             )
-        except:
+        except Exception:
             pass
 
-        # Scroll até o elemento
+        # Scroll até o elemento.
         switch = self.wait.until(
-            EC.presence_of_element_located(self.blanket_switch)
+            EC.presence_of_element_located(self.BLANKET_SWITCH)
         )
 
         self.driver.execute_script(
@@ -363,7 +416,7 @@ class UrbanRoutesPage:
             switch
         )
 
-        # Usa JavaScript para evitar ElementClickInterceptedException
+        # JavaScript evita ElementClickInterceptedException.
         self.driver.execute_script(
             "arguments[0].click();",
             switch
@@ -372,9 +425,13 @@ class UrbanRoutesPage:
         self.wait.until(
             lambda driver:
             driver.find_element(
-                *self.blanket_switch_checkbox
+                *self.BLANKET_SWITCH_CHECKBOX
             ).is_selected()
         )
+
+        return self.driver.find_element(
+            *self.BLANKET_SWITCH_CHECKBOX
+        ).is_selected()
 
     # =========================
     # SORVETES
@@ -382,16 +439,16 @@ class UrbanRoutesPage:
 
     def add_ice_creams(self, quantity):
 
-        # Espera overlay desaparecer
+        # Espera o overlay desaparecer.
         try:
             self.wait.until(
-                EC.invisibility_of_element_located(self.overlay)
+                EC.invisibility_of_element_located(self.OVERLAY)
             )
-        except:
+        except Exception:
             pass
 
         plus_button = self.wait.until(
-            EC.presence_of_element_located(self.ice_cream_plus)
+            EC.presence_of_element_located(self.ICE_CREAM_PLUS)
         )
 
         self.driver.execute_script(
@@ -402,7 +459,7 @@ class UrbanRoutesPage:
         for _ in range(quantity):
 
             plus_button = self.wait.until(
-                EC.presence_of_element_located(self.ice_cream_plus)
+                EC.presence_of_element_located(self.ICE_CREAM_PLUS)
             )
 
             self.driver.execute_script(
@@ -410,22 +467,32 @@ class UrbanRoutesPage:
                 plus_button
             )
 
+        return self.get_ice_cream_count()
+
+    def get_ice_cream_count(self):
+
+        counter = self.wait.until(
+            EC.visibility_of_element_located(self.ICE_CREAM_COUNT)
+        )
+
+        return int(counter.text)
+
     # =========================
     # CHAMAR TÁXI FINAL
     # =========================
 
     def call_taxi(self):
 
-        # Espera qualquer overlay desaparecer
+        # Espera qualquer overlay desaparecer.
         try:
             self.wait.until(
-                EC.invisibility_of_element_located(self.overlay)
+                EC.invisibility_of_element_located(self.OVERLAY)
             )
-        except:
+        except Exception:
             pass
 
         button = self.wait.until(
-            EC.presence_of_element_located(self.call_taxi_button)
+            EC.presence_of_element_located(self.CALL_TAXI_BUTTON)
         )
 
         self.driver.execute_script(
@@ -433,7 +500,7 @@ class UrbanRoutesPage:
             button
         )
 
-        # JavaScript evita o problema do overlay interceptar o clique
+        # JavaScript evita problema de overlay interceptando o clique.
         self.driver.execute_script(
             "arguments[0].click();",
             button
@@ -443,14 +510,12 @@ class UrbanRoutesPage:
     # VERIFICAR BUSCA DO CARRO
     # =========================
 
-    def call_taxi_and_check_modal(self):
-
-        self.call_taxi()
+    def get_car_search_title(self):
 
         modal = self.wait.until(
             EC.visibility_of_element_located(
-                self.car_search_modal
+                self.CAR_SEARCH_MODAL
             )
         )
 
-        assert modal.text == "Buscar carro"
+        return modal.text
